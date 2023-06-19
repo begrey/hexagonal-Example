@@ -20,7 +20,6 @@ import java.io.IOException;
 @RequestMapping(value = "/users")
 public class LoginController {
     private final LoginUseCase loginUseCase;
-    private final LogoutUseCase logoutUseCase;
     @PostMapping("/login")
     public String login(@RequestBody LoginRequestDto userLoginDto, HttpServletRequest request, HttpServletResponse response) throws IOException {
         LoginCommand loginCommand = new LoginCommand(userLoginDto.getUserId(),

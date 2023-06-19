@@ -1,14 +1,16 @@
 package com.example.hexagonal.global.security;
 
-import com.example.hexagonal.adapter.out.persistence.user.JwtTokenProvider;
+import com.example.hexagonal.application.port.out.user.LoadUserAuthPort;
 import com.example.hexagonal.global.enums.ErrorType;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -18,12 +20,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @Slf4j
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final LoadUserAuthPort loadUserAuthPort;
     private static final String JWT_PREFIX = "Bearer ";
 
     /*
@@ -36,7 +40,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (StringUtils.hasText(token)) {   // token 검증
             try {
                 jwtTokenProvider.validateToken(token);
-                Authentication auth = jwtTokenProvider.getAuthentication(token);
+                Authentication auth = getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(auth);
             } catch (ExpiredJwtException expiredJwtException) {
                 request.setAttribute("exception", ErrorType.EXPIRED_TOKEN);
@@ -60,6 +64,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             return requestTokenHeader.substring(7);
         }
         return null;
+    }
+
+    public Authentication getAuthentication(String token) {
+        List<String> userRoleList = loadUserAuthPort.getUserRoles(token);
+        UserDetails userDetails = loadUserAuthPort.getUserDetailByUserName(jwtTokenProvider.getUsernameFromToken(token));
+        return new UsernamePasswordAuthenticationToken(userDetails, userRoleList, userDetails.getAuthorities());
     }
 
 }

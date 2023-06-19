@@ -1,7 +1,9 @@
 package com.example.hexagonal.global.config;
 
 
-import com.example.hexagonal.adapter.out.persistence.user.JwtTokenProvider;
+import com.example.hexagonal.application.port.out.user.LoadUserAuthPort;
+import com.example.hexagonal.application.port.out.user.LoadUserPort;
+import com.example.hexagonal.global.security.JwtTokenProvider;
 import com.example.hexagonal.global.enums.ErrorType;
 import com.example.hexagonal.global.model.ErrorResponse;
 import com.example.hexagonal.global.security.JwtAuthenticationFilter;
@@ -34,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui.html"
     };
     private final JwtTokenProvider jwtTokenProvider;
+    private final LoadUserAuthPort loadUserAuthPort;
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -51,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                     .authenticationEntryPoint(customAuthenticationEntryPoint)
                     .accessDeniedHandler(webAccessDeniedHandler)
                 .and()
-                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, loadUserAuthPort), UsernamePasswordAuthenticationFilter.class);
     }
 
     private final AuthenticationEntryPoint customAuthenticationEntryPoint = (request, response, authenticationException) -> {

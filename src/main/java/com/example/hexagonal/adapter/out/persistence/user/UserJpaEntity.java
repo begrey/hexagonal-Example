@@ -1,5 +1,6 @@
 package com.example.hexagonal.adapter.out.persistence.user;
 
+import com.example.hexagonal.domain.user.User;
 import com.example.hexagonal.global.enums.AdminType;
 import com.example.hexagonal.global.model.BaseEntity;
 import lombok.*;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Builder
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -17,7 +19,7 @@ import java.util.List;
         name="user",
         uniqueConstraints = {@UniqueConstraint(name="uk_user_001", columnNames = "phone"),
         })
-public class UserJpaEntity extends BaseEntity {
+class UserJpaEntity extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -50,7 +52,7 @@ public class UserJpaEntity extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private AdminType adminType;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "userJpaEntity", fetch = FetchType.LAZY)
     @Column
     private List<UserRoleJpaEntity> userRoles = new ArrayList<>();
 
@@ -59,13 +61,15 @@ public class UserJpaEntity extends BaseEntity {
     }
 
 
-//    public UserJpaEntity update(UserRequestDto.Put update) {
-//        this.team = update.getTeam();
-//        this.phone = update.getPhone();
-//        this.adminType = update.getAdminType();
-//        this.userName = update.getUserName();
-//        return this;
-//    }
+    public UserJpaEntity update(User updateUser) {
+        this.midasUserId = updateUser.getMidasUserId();
+        this.password = updateUser.getPassword();
+        this.team = updateUser.getTeam();
+        this.phone = updateUser.getPhone();
+        this.adminType = updateUser.getAdminType();
+        this.userName = updateUser.getUserName();
+        return this;
+    }
 
 
 }

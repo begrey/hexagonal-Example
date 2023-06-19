@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public interface UserRoleRepository extends JpaRepository<UserRoleJpaEntity, Long> {
-    List<UserRoleJpaEntity> findByUserUserId(Long userId);
-    void deleteAllByUserUserId(Long userId);
+interface UserRoleRepository extends JpaRepository<UserRoleJpaEntity, Long> {
+    List<UserRoleJpaEntity> findByUserJpaEntityUserId(Long userId);
+    void deleteAllByUserJpaEntityUserId(Long userId);
 
 }

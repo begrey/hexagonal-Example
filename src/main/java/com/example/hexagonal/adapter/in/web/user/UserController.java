@@ -2,10 +2,15 @@ package com.example.hexagonal.adapter.in.web.user;
 
 
 import com.example.hexagonal.application.port.in.user.*;
+import com.example.hexagonal.domain.user.User;
 import com.example.hexagonal.global.enums.AdminType;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "관리자 관리 API")
 @RequiredArgsConstructor
@@ -14,9 +19,12 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
 
     private final RegisterUserUseCase registerUserUseCase;
+    private final LoadUserUseCase loadUserUseCase;
+    private final ModifyUserUseCase modifyUserUseCase;
+    private final DeleteUserUseCase deleteUserUseCase;
 
     @PostMapping("/users")
-    public void registerUser(@RequestBody UserRequestDto.Post post) {
+    public String registerUser(@RequestBody UserRequestDto.Post post) {
         registerUserUseCase.registerUser(RegisterUserCommand.create(
                 post.getUserName(),
                 post.getMidasUserId(),
@@ -25,26 +33,38 @@ public class UserController {
                 post.getPhone(),
                 post.getAdminType(),
                 post.getUserRoles()));
+        return "User Registered.";
     }
 
-//    @GetMapping("/users/{userId}")
-//    public UserResponseDto getUser(@PathVariable Long userId) {
-//        return userService.selectUser(userId);
-//    }
-//
-//    @GetMapping("/users")
-//    public List<UserResponseDto> getUserList(Pageable pageable) {
-//        return userService.selectUserList(pageable);
-//    }
-//
-//    @PutMapping("/users/{userId}")
-//    public UserResponseDto modifyUser(@PathVariable long userId, @RequestBody UserRequestDto.Put update) {
-//        return userService.modifyUser(userId, update);
-//    }
-//
-//    @DeleteMapping("/users/{userId}")
-//    public void deleteUser(@PathVariable Long userId) {
-//        userService.deleteUser(userId);
-//    }
+    @GetMapping("/users/{userId}")
+    public UserResponseDto getUser(@PathVariable Long userId) {
+        User user = loadUserUseCase.loadUser(userId);
+        return UserResponseDto.toDto(user);
+    }
+
+    @GetMapping("/users")
+    public Page<UserResponseDto> getUserList(Pageable pageable) {
+        Page<User> users = loadUserUseCase.loadUsers(pageable);
+        return users.map(user -> UserResponseDto.toDto(user));
+    }
+
+    @PutMapping("/users/{userId}")
+    public String modifyUser(@PathVariable long userId, @RequestBody UserRequestDto.Put update) {
+        modifyUserUseCase.modifyUser(userId, ModifyUserCommand.create(
+                update.getUserName(),
+                update.getMidasUserId(),
+                update.getTeam(),
+                update.getPassword(),
+                update.getPhone(),
+                update.getAdminType(),
+                update.getUserRoles()));
+        return "User Modified.";
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public String deleteUser(@PathVariable Long userId) {
+        deleteUserUseCase.deleteUser(userId);
+        return "User Deleted.";
+    }
 
 }

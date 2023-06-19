@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 public class LoginCommand {
 
     @NotBlank
-    private final String userId;
+    private final String midasUserId;
 
     @NotBlank
     private final String password;
