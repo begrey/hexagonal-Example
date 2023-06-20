@@ -6,6 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.List;
 
 public interface LoadUserAuthPort {
-    List<String> getUserRoles(String token);
+    List<String> getUserRoles(String userName, String password);
     UserDetails getUserDetailByUserName(String midasUserId);
+
 }

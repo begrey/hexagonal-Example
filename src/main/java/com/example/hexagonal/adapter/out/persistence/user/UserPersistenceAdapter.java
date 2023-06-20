@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -84,5 +85,6 @@ class UserPersistenceAdapter implements RegisterUserPort, LoadUserPort, ModifyUs
     public void deleteUserRole(Long userId) {
         userRoleRepository.deleteAllByUserJpaEntityUserId(userId);
     }
+
 
 }

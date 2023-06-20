@@ -24,7 +24,7 @@ class UserResponseDto{
 //    private String password;
     private String phone;
     private AdminType adminType;
-    List<RoleType> userRoles; // 반환값은 url값만 , 차후에 ENUM을 통해 role 관리
+    List<RoleType> userRoles;
 
 
     public static UserResponseDto toDto(User user) {
@@ -36,10 +36,6 @@ class UserResponseDto{
                 user.getAdminType(),
                 user.getUserRoles());
     }
-//
-//    public void setUserRoleUrl(List<UserRole> userRoles) {
-//        this.userRoles = userRoles.stream().map(role -> role.getUrl()).toList();
-//    }
 
 }
 

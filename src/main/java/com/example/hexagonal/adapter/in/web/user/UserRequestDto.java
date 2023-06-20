@@ -1,6 +1,5 @@
 package com.example.hexagonal.adapter.in.web.user;
 
-import com.example.hexagonal.adapter.out.persistence.user.UserJpaEntity;
 import com.example.hexagonal.global.enums.AdminType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;

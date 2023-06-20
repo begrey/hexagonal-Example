@@ -12,4 +12,5 @@ public interface LoadUserPort {
     User readUserByUserId(Long userId);
 
     Page<User> readAllUser(Pageable pageable);
+
 }

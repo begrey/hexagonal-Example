@@ -1,6 +1,7 @@
 package com.example.hexagonal.global.security;
 
 import com.example.hexagonal.application.port.out.user.LoadUserAuthPort;
+import com.example.hexagonal.application.port.out.user.LoadUserPort;
 import com.example.hexagonal.global.enums.ErrorType;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
@@ -28,6 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtTokenProvider jwtTokenProvider;
     private final LoadUserAuthPort loadUserAuthPort;
+
     private static final String JWT_PREFIX = "Bearer ";
 
     /*
@@ -67,8 +69,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     }
 
     public Authentication getAuthentication(String token) {
-        List<String> userRoleList = loadUserAuthPort.getUserRoles(token);
         UserDetails userDetails = loadUserAuthPort.getUserDetailByUserName(jwtTokenProvider.getUsernameFromToken(token));
+        List<String> userRoleList = loadUserAuthPort.getUserRoles(userDetails.getUsername(), userDetails.getPassword());
         return new UsernamePasswordAuthenticationToken(userDetails, userRoleList, userDetails.getAuthorities());
     }
 

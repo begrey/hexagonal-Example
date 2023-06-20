@@ -6,6 +6,7 @@ import com.example.hexagonal.global.enums.RoleType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,6 +24,7 @@ public class UserLog {
 
     private final boolean isLoginSuccess;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private final LocalDateTime loginDatetime;
 
 
