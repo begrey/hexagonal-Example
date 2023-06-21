@@ -1,6 +1,4 @@
-package com.example.hexagonal.adapter.out.persistence.category;
-
-import com.example.hexagonal.adapter.out.persistence.buildcase.BuildCaseJpaEntity;
+package com.example.hexagonal.adapter.out.persistence.buildcase;
 
 import com.example.hexagonal.global.model.BaseEntity;
 import lombok.*;
@@ -21,7 +19,7 @@ public class CategoryJpaEntity extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "category_id")
     @Comment("카테고리 아이디")
-    private long categoryId;
+    private Long categoryId;
 
     @Column(name = "category_name", nullable = false, length = 12)
     @Comment("카테고리명")

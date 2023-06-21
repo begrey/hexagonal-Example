@@ -1,6 +1,7 @@
 package com.example.hexagonal.application.port.in.user;
 
 import com.example.hexagonal.global.enums.AdminType;
+import com.example.hexagonal.global.enums.RoleType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +22,7 @@ public class RegisterUserCommand {
     private String phone;
     @NotBlank
     private AdminType adminType;
-    List<String> userRoles;
+    List<RoleType> userRoles;
 
     public static RegisterUserCommand create(String userName,
                                              String midasUserId,
@@ -29,7 +30,7 @@ public class RegisterUserCommand {
                                              String password,
                                              String phone,
                                              AdminType adminType,
-                                             List<String> userRoles) {
+                                             List<RoleType> userRoles) {
         return new RegisterUserCommand(userName, midasUserId, team, password, phone, adminType, userRoles);
     }
 }

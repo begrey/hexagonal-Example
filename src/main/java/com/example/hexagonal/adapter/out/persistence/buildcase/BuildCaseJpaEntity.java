@@ -1,6 +1,8 @@
 package com.example.hexagonal.adapter.out.persistence.buildcase;
 
-import com.example.hexagonal.adapter.out.persistence.category.CategoryJpaEntity;
+import com.example.hexagonal.domain.buildcase.BuildCase;
+import com.example.hexagonal.domain.category.Category;
+import com.example.hexagonal.global.enums.DisplayType;
 import com.example.hexagonal.global.model.BaseEntity;
 import lombok.*;
 import org.hibernate.annotations.Comment;
@@ -28,7 +30,8 @@ public class BuildCaseJpaEntity extends BaseEntity {
 
     @Column(name = "is_visible", nullable = false, length = 12)
     @Comment("노출 여부")
-    private String isVisible;
+    @Enumerated(EnumType.STRING)
+    private DisplayType isVisible;
 
     @OneToMany(mappedBy = "buildCase", fetch = FetchType.LAZY)
     @Column
@@ -45,13 +48,20 @@ public class BuildCaseJpaEntity extends BaseEntity {
     @Comment("구축사례 테이블 아이디")
     private List<BuildCaseTableJpaEntity> buildCaseTables = new ArrayList<>();
 
-//    public void setBuildCaseFiles(BuildCaseFileJpaEntity file) {
-//        if (this.buildCaseFiles == null)
-//            this.buildCaseFiles = new ArrayList<>();
-//        this.buildCaseFiles.add(file);
-//    }
-//
-//    public void setTable(List<BuildCaseTableJpaEntity> table) {
-//        this.buildCaseTables = table;
-//    }
+    public void setBuildCaseFiles(BuildCaseFileJpaEntity file) {
+        if (this.buildCaseFiles == null)
+            this.buildCaseFiles = new ArrayList<>();
+        this.buildCaseFiles.add(file);
+    }
+
+    public void setTable(List<BuildCaseTableJpaEntity> table) {
+        this.buildCaseTables = table;
+    }
+
+    public BuildCaseJpaEntity update(BuildCase changeBuildCase, CategoryJpaEntity category) {
+        this.buildCaseName = changeBuildCase.getBuildCaseName();
+        this.isVisible = changeBuildCase.getIsVisible();
+        this.category = category;
+        return this;
+    }
 }

@@ -18,8 +18,7 @@ public class ModifyBuildCaseCommand {
     @NotBlank
     private final DisplayType isVisible;
 
-    @NotBlank
-    private final MultipartFile thumbnailSrc;
+    private final MultipartFile thumbnail;
 
     private final List<MultipartFile> buildCaseFile;
 

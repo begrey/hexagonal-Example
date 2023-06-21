@@ -19,9 +19,9 @@ public class BuildCase {
 
     private final DisplayType isVisible;
 
-    private final String thumbnailSrc;
+    private final BuildCaseFile thumbnailFile;
 
-    private final List<BuildCaseFile> buildCaseFile;
+    private final List<BuildCaseFile> detailFiles;
 
     private final List<BuildCaseTable> buildCaseTable;
 
@@ -31,18 +31,18 @@ public class BuildCase {
     public static BuildCase withId(Long employmentId,
                                     String buildCaseName,
                                    DisplayType isVisible,
-                                   String thumbnailSrc,
-                                   List<BuildCaseFile> buildCaseFile,
+                                   BuildCaseFile thumbnailFile,
+                                   List<BuildCaseFile> detailFiles,
                                    List<BuildCaseTable> buildCaseTable,
                                    Long category) {
-        return new BuildCase(employmentId, buildCaseName, isVisible, thumbnailSrc, buildCaseFile,buildCaseTable, category);
+        return new BuildCase(employmentId, buildCaseName, isVisible, thumbnailFile, detailFiles, buildCaseTable, category);
     }
     public static BuildCase withoutId(String buildCaseName,
                                       DisplayType isVisible,
-                                      String thumbnailSrc,
-                                      List<BuildCaseFile> buildCaseFile,
+                                      BuildCaseFile thumbnailSrc,
+                                      List<BuildCaseFile> detailFiles,
                                       List<BuildCaseTable> buildCaseTable,
                                       Long category) {
-        return new BuildCase(null, buildCaseName, isVisible, thumbnailSrc, buildCaseFile,buildCaseTable, category);
+        return new BuildCase(null, buildCaseName, isVisible, thumbnailSrc, detailFiles, buildCaseTable, category);
     }
 }

@@ -27,13 +27,13 @@ class RegisterUserService implements RegisterUserUseCase {
                     registerUserCommand.getTeam(),
                     registerUserCommand.getPhone(),
                     registerUserCommand.getAdminType(),
-                    stringToRoleType(registerUserCommand.getUserRoles()));
+                    registerUserCommand.getUserRoles());
         registerUserPort.registerUser(user);
     }
 
-    public List<RoleType> stringToRoleType(List<String> userRoles) {
-        return userRoles.stream()
-                .map(userRole -> RoleType.of(userRole))
-                .toList();
-    }
+//    public List<RoleType> stringToRoleType(List<String> userRoles) {
+//        return userRoles.stream()
+//                .map(userRole -> RoleType.of(userRole))
+//                .toList();
+//    }
 }

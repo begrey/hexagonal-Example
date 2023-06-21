@@ -42,10 +42,9 @@ public class BuildCaseController {
     }
 
     @PutMapping(value = "/{buildCaseId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    public String updateEmployment(@RequestPart BuildcaseRequestDto.Put update, @PathVariable Long buildCaseId,
-                                                 @RequestPart(required = true, value = "thumbnail") MultipartFile thumbnail,
-                                                 @RequestPart(required = false, value = "detailFiles") List<MultipartFile> detailFiles,
-                                                 @PathVariable Long employmentId) throws IOException {
+    public String updateBuildCase(@RequestPart BuildcaseRequestDto.Put update, @PathVariable Long buildCaseId,
+                                                 @RequestPart(required = false, value = "thumbnail") MultipartFile thumbnail,
+                                                 @RequestPart(required = false, value = "detailFiles") List<MultipartFile> detailFiles) throws IOException {
         modifyBuildCaseUseCase.modifyBuildCase(buildCaseId, ModifyBuildCaseCommand.create(
                 update.getBuildCaseName(),
                 update.getIsVisible(),
@@ -58,12 +57,12 @@ public class BuildCaseController {
     }
 
     @GetMapping
-    public Page<BuildcaseResponseDto> selectEmploymentList(Pageable pageable) {
+    public Page<BuildcaseResponseDto> selectBuildCaseList(Pageable pageable) {
         return loadBuildCaseUseCase.getBuildCases(pageable).map(buildCase -> BuildcaseResponseDto.toDto(buildCase));
     }
 
     @GetMapping("/{buildCaseId}")
-    public BuildcaseResponseDto selectEmployment(@PathVariable Long buildCaseId) {
+    public BuildcaseResponseDto selectBuildCase(@PathVariable Long buildCaseId) {
         return BuildcaseResponseDto.toDto(loadBuildCaseUseCase.getBuildCase(buildCaseId));
     }
 

@@ -1,6 +1,7 @@
 package com.example.hexagonal.adapter.in.web.user;
 
 import com.example.hexagonal.global.enums.AdminType;
+import com.example.hexagonal.global.enums.RoleType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 
@@ -19,7 +20,7 @@ public class UserRequestDto {
         private String password;
         private String phone;
         private AdminType adminType;
-        List<String> userRoles; // 차후에 ENUM을 통해 role 관리
+        List<RoleType> userRoles; // 차후에 ENUM을 통해 role 관리
     }
 
     @Getter
@@ -30,7 +31,7 @@ public class UserRequestDto {
         private String password;
         private String phone;
         private AdminType adminType;
-        List<String> userRoles; // 차후에 ENUM을 통해 role 관리
+        List<RoleType> userRoles; // 차후에 ENUM을 통해 role 관리
 
     }
 

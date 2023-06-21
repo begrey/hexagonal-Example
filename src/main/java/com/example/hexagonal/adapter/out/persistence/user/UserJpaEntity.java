@@ -54,7 +54,7 @@ class UserJpaEntity extends BaseEntity {
 
     @OneToMany(mappedBy = "userJpaEntity", fetch = FetchType.LAZY)
     @Column
-    private List<UserRoleJpaEntity> userRoles = new ArrayList<>();
+    private List<UserRoleJpaEntity> userRoles;
 
     public void setUserRoles (List<UserRoleJpaEntity> userRoles) {
         this.userRoles = userRoles;

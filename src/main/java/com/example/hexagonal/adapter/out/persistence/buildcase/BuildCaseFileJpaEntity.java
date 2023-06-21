@@ -1,7 +1,8 @@
 package com.example.hexagonal.adapter.out.persistence.buildcase;
 
 
-import com.midas.midas_project.model.BaseEntity;
+import com.example.hexagonal.global.enums.FileType;
+import com.example.hexagonal.global.model.BaseEntity;
 import lombok.*;
 import org.apache.commons.io.FilenameUtils;
 import org.hibernate.annotations.Comment;
@@ -40,8 +41,9 @@ public class BuildCaseFileJpaEntity extends BaseEntity {
     private String extension;
 
     @Column(name = "file_type", nullable = false, length = 10)
-    @Comment("파일 종류 (배너 / 썸네일 / 상세이미지)")
-    private String fileType;
+    @Comment("파일 종류 (썸네일 / 상세이미지)")
+    @Enumerated(EnumType.STRING)
+    private FileType fileType;
 
     @Column(name = "file_size", nullable = false)
     @Comment("파일 크기")
@@ -52,24 +54,18 @@ public class BuildCaseFileJpaEntity extends BaseEntity {
     @Comment("구축사례 아이디")
     private BuildCaseJpaEntity buildCase;
 
-    @OneToOne(mappedBy = "buildCaseFile", fetch = FetchType.LAZY)
-    private BuildCaseBanner buildCaseBanner;
 
+//    public static BuildCaseFileJpaEntity toEntity(MultipartFile file, String filePath, BuildCaseJpaEntity buildCase, String fileType) {
+//        String filename = file.getOriginalFilename();
+//        return BuildCaseFileJpaEntity.builder()
+//                .filePath(filePath)
+//                .realName(filename)
+//                .tempName(UUID.randomUUID().toString())
+//                .extension(FilenameUtils.getExtension(filename))
+//                .fileSize(file.getSize())
+//                .fileType(fileType)
+//                .buildCase(buildCase)
+//                .build();
+//    }
 
-    public static BuildCaseFileJpaEntity toEntity(MultipartFile file, String filePath, BuildCaseJpaEntity buildCase, String fileType) {
-        String filename = file.getOriginalFilename();
-        return BuildCaseFileJpaEntity.builder()
-                .filePath(filePath)
-                .realName(filename)
-                .tempName(UUID.randomUUID().toString())
-                .extension(FilenameUtils.getExtension(filename))
-                .fileSize(file.getSize())
-                .fileType(fileType)
-                .buildCase(buildCase)
-                .build();
-    }
-
-    public void setBuildCaseBanner(BuildCaseBanner buildCaseBanner) {
-        this.buildCaseBanner = buildCaseBanner;
-    }
 }

@@ -28,7 +28,7 @@ public class BuildcaseResponseDto {
 
 
     public static BuildcaseResponseDto toDto(BuildCase buildCase) {
-        List<String> detailSrcs = buildCase.getBuildCaseFile().stream()
+        List<String> detailSrcs = buildCase.getDetailFiles().stream()
                 .map(file -> file.getFilePath()).toList();
         List<BuildCaseTableDto> tableDtos = buildCase.getBuildCaseTable().stream()
                 .map(table -> BuildCaseTableDto.toDto(table)).toList();
@@ -36,7 +36,7 @@ public class BuildcaseResponseDto {
         return new BuildcaseResponseDto(buildCase.getBuildCaseName(),
                 buildCase.getIsVisible().getCode(),
                 buildCase.getCategory(),
-                buildCase.getThumbnailSrc(),
+                buildCase.getThumbnailFile().getFilePath(),
                 detailSrcs,
                 tableDtos
                 );

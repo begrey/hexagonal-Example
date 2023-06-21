@@ -29,7 +29,6 @@ class EmploymentMapper {
     }
 
     EmploymentJpaEntity toEmploymentEntity(Employment employment) {
-        System.out.println(employment.getRecruitStartDatetime() + "dddd");
         return EmploymentJpaEntity.builder()
                 .employmentId(employment.getEmploymentId())
                 .assignedTask(employment.getAssignedTask())

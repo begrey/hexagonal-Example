@@ -26,12 +26,12 @@ class ModifyUserService implements ModifyUserUseCase {
                 modifyUserCommand.getTeam(),
                 modifyUserCommand.getPhone(),
                 modifyUserCommand.getAdminType(),
-                stringToRoleType(modifyUserCommand.getUserRoles()));
+                modifyUserCommand.getUserRoles());
         modifyUserPort.modifyUser(userId, changeUser);
     }
-    public List<RoleType> stringToRoleType(List<String> userRoles) {
-        return userRoles.stream()
-                .map(userRole -> RoleType.of(userRole))
-                .toList();
-    }
+//    public List<RoleType> stringToRoleType(List<String> userRoles) {
+//        return userRoles.stream()
+//                .map(userRole -> RoleType.of(userRole))
+//                .toList();
+//    }
 }

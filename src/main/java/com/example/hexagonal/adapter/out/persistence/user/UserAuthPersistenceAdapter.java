@@ -1,6 +1,7 @@
 package com.example.hexagonal.adapter.out.persistence.user;
 
 import com.example.hexagonal.application.port.out.user.LoadUserAuthPort;
+import com.example.hexagonal.global.enums.RoleType;
 import com.example.hexagonal.global.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,9 +30,9 @@ class UserAuthPersistenceAdapter implements LoadUserAuthPort {
     // 인증객체 생성 여부 boolean
     @Transactional
     @Override
-    public List<String> getUserRoles(String userName, String password) {
+    public List<RoleType> getUserRoles(String userName, String password) {
         UserJpaEntity user = userRepository.findByMidasUserIdAndPassword(userName, password);
-        List<String> userRoleList = user.getUserRoles().stream().map(role -> role.getUrl()).toList();
+        List<RoleType> userRoleList = user.getUserRoles().stream().map(role -> role.getUrl()).toList();
         return userRoleList;
     }
 }

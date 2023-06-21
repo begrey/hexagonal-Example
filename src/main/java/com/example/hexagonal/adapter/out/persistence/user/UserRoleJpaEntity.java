@@ -1,6 +1,7 @@
 package com.example.hexagonal.adapter.out.persistence.user;
 
 
+import com.example.hexagonal.global.enums.RoleType;
 import com.example.hexagonal.global.model.BaseEntity;
 import lombok.*;
 import org.hibernate.annotations.Comment;
@@ -23,7 +24,8 @@ class UserRoleJpaEntity extends BaseEntity {
 
     @Column(name = "url", nullable = false, length = 100)
     @Comment("권한 체크 대상 url")
-    private String url;
+    @Enumerated(EnumType.STRING)
+    private RoleType url;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", foreignKey = @ForeignKey(name = "user_role_ibfk_1"))

@@ -25,9 +25,9 @@ public class AuthorizationChecker {
             return false;
         }
 
-        List<String> roleUrlList = (List<String>) authentication.getCredentials();
-        for(String url : roleUrlList) {
-            if (new AntPathMatcher().match(RoleType.of(url).getUrl(), request.getRequestURI())) {
+        List<RoleType> roleUrlList = (List<RoleType>) authentication.getCredentials();
+        for(RoleType roleType : roleUrlList) {
+            if (new AntPathMatcher().match(roleType.getUrl(), request.getRequestURI())) {
                 return true;
             }
         }

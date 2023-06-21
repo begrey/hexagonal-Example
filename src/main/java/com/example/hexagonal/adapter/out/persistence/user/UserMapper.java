@@ -12,7 +12,7 @@ import java.util.List;
 class UserMapper {
     User toDomain(UserJpaEntity userJpaEntity) {
         List<RoleType> roleTypes = userJpaEntity.getUserRoles().stream()
-                .map(userRole -> RoleType.of(userRole.getUrl()))
+                .map(userRole -> userRole.getUrl())
                 .toList();
         return User.withId(userJpaEntity.getUserId(),
                 userJpaEntity.getMidasUserId(),
@@ -38,6 +38,6 @@ class UserMapper {
 
     UserRoleJpaEntity toRoleJpaEntity(RoleType roleType, UserJpaEntity user) {
                 return UserRoleJpaEntity.builder()
-                    .url(roleType.getRole()).userJpaEntity(user).build();
+                    .url(roleType).userJpaEntity(user).build();
     }
 }
