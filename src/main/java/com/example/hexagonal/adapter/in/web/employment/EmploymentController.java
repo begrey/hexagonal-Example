@@ -17,7 +17,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/employments")
 @RestController
-public class EmploymentController {
+class EmploymentController {
     private final AddEmploymentUseCase addEmploymentUseCase;
     private final ModifyEmploymentUseCase modifyEmploymentUseCase;
     private final DeleteEmploymentUseCase deleteEmploymentUseCase;

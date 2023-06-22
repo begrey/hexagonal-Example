@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 @Component
-public class BuildCaseMapper {
+class BuildCaseMapper {
 
     BuildCase toBuildCase(BuildCaseJpaEntity entity) {
         // 썸네일, 상세 이미지로 각자 분할

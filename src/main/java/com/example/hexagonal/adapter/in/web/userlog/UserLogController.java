@@ -18,7 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/admin")
 @RestController
-public class UserLogController {
+class UserLogController {
 
     public final LoadUserLogUseCase loadUserUseCase;
 

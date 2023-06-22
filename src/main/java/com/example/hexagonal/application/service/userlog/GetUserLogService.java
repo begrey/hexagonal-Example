@@ -1,6 +1,5 @@
 package com.example.hexagonal.application.service.userlog;
 
-import com.example.hexagonal.adapter.in.web.userlog.UserLogResponseDto;
 import com.example.hexagonal.application.port.in.userlog.LoadUserLogUseCase;
 import com.example.hexagonal.application.port.out.userlog.LoadUserLogPort;
 import com.example.hexagonal.domain.userlog.UserLog;

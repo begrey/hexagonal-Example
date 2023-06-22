@@ -3,6 +3,7 @@ package com.example.hexagonal.adapter.in.web.buildcase;
 import com.example.hexagonal.application.port.in.buildcase.*;
 import com.example.hexagonal.application.port.in.employment.LoadEmploymentUseCase;
 import com.example.hexagonal.application.port.in.employment.ModifyEmploymentCommand;
+import com.example.hexagonal.domain.buildcase.BuildCaseTable;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -18,7 +19,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/build-case/{category}")
-public class BuildCaseController {
+class BuildCaseController {
 
     private final AddBuildCaseUseCase addBuildCaseUseCase;
     private final ModifyBuildCaseUseCase modifyBuildCaseUseCase;
@@ -30,12 +31,14 @@ public class BuildCaseController {
                                                  @RequestPart(required = true, value = "thumbnail") MultipartFile thumbnail,
                                                  @RequestPart(required = false, value = "detailFiles") List<MultipartFile> detailFiles
                                                 ) throws IOException {
+        List<BuildCaseTable> buildCaseTables = post.getTables().stream()
+                .map(tableDto -> BuildCaseTable.withoutId(tableDto.getTitle(), tableDto.getContent())).toList();
         addBuildCaseUseCase.addBuildCase(AddBuildCaseCommand.create(
                 post.getBuildCaseName(),
                 post.getIsVisible(),
                 thumbnail,
                 detailFiles,
-                post.getTables(),
+                buildCaseTables,
                 post.getCategoryId()
         ));
         return "BuildCase Created.";
@@ -45,12 +48,14 @@ public class BuildCaseController {
     public String updateBuildCase(@RequestPart BuildcaseRequestDto.Put update, @PathVariable Long buildCaseId,
                                                  @RequestPart(required = false, value = "thumbnail") MultipartFile thumbnail,
                                                  @RequestPart(required = false, value = "detailFiles") List<MultipartFile> detailFiles) throws IOException {
+        List<BuildCaseTable> buildCaseTables = update.getTables().stream()
+                        .map(tableDto -> BuildCaseTable.withoutId(tableDto.getTitle(), tableDto.getContent())).toList();
         modifyBuildCaseUseCase.modifyBuildCase(buildCaseId, ModifyBuildCaseCommand.create(
                 update.getBuildCaseName(),
                 update.getIsVisible(),
                 thumbnail,
                 detailFiles,
-                update.getTables(),
+                buildCaseTables,
                 update.getCategoryId()
         ));
         return "BuildCase Modified.";

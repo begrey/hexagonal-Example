@@ -20,7 +20,6 @@ import java.util.function.Function;
 @RequiredArgsConstructor
 @Component
 public class JwtTokenProvider {
-//    private static final long serialVersionUID = -2550185165626007488L;
 
     public static final long JWT_TOKEN_VALIDITY = 2 * 60 * 60;
 
@@ -52,16 +51,5 @@ public class JwtTokenProvider {
                 .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALIDITY * 1000))
                 .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
-
-//    // JWT 토큰에서 인증 정보 조회
-//    @Transactional
-//    public Authentication getAuthentication(String token) {
-//        UserDetails userDetails = userDetailService.loadUserByUsername(this.getUsernameFromToken(token));
-//        UserJpaEntity user = userRepository.findByMidasUserIdAndPassword(userDetails.getUsername(), userDetails.getPassword());
-//        List<String> userRoleList = user.getUserRoles().stream().map(role -> role.getUrl()).toList();
-//        return new UsernamePasswordAuthenticationToken(userDetails, userRoleList, userDetails.getAuthorities());
-//    }
-
-
 
 }

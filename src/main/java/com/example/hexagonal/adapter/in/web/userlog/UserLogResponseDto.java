@@ -12,7 +12,7 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Schema(description = "관리자 로그 응답 객체")
-public class UserLogResponseDto {
+class UserLogResponseDto {
     private String midasUserId;
     private String ipAddress;
     private String sessionId;

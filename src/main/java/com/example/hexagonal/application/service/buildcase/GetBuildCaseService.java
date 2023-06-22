@@ -13,7 +13,7 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class GetBuildCaseService implements LoadBuildCaseUseCase {
+class GetBuildCaseService implements LoadBuildCaseUseCase {
 
     private final LoadBuildCasePort loadBuildCasePort;
     @Override

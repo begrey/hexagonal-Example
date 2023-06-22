@@ -4,7 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface BuildCaseFileRepository extends JpaRepository<BuildCaseFileJpaEntity, Long> {
+interface BuildCaseFileRepository extends JpaRepository<BuildCaseFileJpaEntity, Long> {
     BuildCaseFileJpaEntity findByBuildCaseBuildCaseId(Long buildCaseId);
     void deleteByBuildCaseBuildCaseId(Long buildCaseId);
 }

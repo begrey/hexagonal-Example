@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class DeleteBuildCaseService implements DeleteBuildCaseUseCase {
+class DeleteBuildCaseService implements DeleteBuildCaseUseCase {
 
     private final DeleteBuildCasePort deleteBuildCasePort;
     @Override

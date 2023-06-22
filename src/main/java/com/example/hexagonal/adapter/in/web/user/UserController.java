@@ -16,7 +16,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/admin")
 @RestController
-public class UserController {
+class UserController {
 
     private final RegisterUserUseCase registerUserUseCase;
     private final LoadUserUseCase loadUserUseCase;

@@ -7,7 +7,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.time.LocalDateTime;
 
 
-public class EmploymentRequestDto {
+class EmploymentRequestDto {
     @Getter
     public static class Post {
         private String position;

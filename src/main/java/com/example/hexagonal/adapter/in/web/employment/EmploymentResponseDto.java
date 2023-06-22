@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class EmploymentResponseDto {
+class EmploymentResponseDto {
     private Long employmentId;
     private String position;
     private String occupation;

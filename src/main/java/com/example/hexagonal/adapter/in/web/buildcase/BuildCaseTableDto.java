@@ -8,7 +8,7 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class BuildCaseTableDto {
+class BuildCaseTableDto {
     private String title;
     private String content;
 

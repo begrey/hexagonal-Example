@@ -18,7 +18,7 @@ import java.io.IOException;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(value = "/users")
-public class LoginController {
+class LoginController {
     private final LoginUseCase loginUseCase;
     @PostMapping("/login")
     public String login(@RequestBody LoginRequestDto userLoginDto, HttpServletRequest request, HttpServletResponse response) throws IOException {

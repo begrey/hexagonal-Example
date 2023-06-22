@@ -18,7 +18,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-public class BuildCasePersistenceAdapter implements LoadBuildCasePort, ModifyBuildCasePort, DeleteBuildCasePort, AddBuildCasePort {
+class BuildCasePersistenceAdapter implements LoadBuildCasePort, ModifyBuildCasePort, DeleteBuildCasePort, AddBuildCasePort {
 
     private final BuildCaseRepository buildCaseRepository;
     private final BuildCaseFileRepository buildCaseFileRepository;

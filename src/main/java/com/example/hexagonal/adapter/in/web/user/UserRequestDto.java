@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Schema(description = "관리자 관리 요청 객체")
-public class UserRequestDto {
+class UserRequestDto {
 
 //    @Builder
     @Getter

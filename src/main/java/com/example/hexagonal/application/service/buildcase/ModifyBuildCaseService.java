@@ -1,6 +1,5 @@
 package com.example.hexagonal.application.service.buildcase;
 
-import com.example.hexagonal.adapter.in.web.buildcase.BuildCaseTableDto;
 import com.example.hexagonal.application.port.in.buildcase.ModifyBuildCaseCommand;
 import com.example.hexagonal.application.port.in.buildcase.ModifyBuildCaseUseCase;
 import com.example.hexagonal.application.port.in.employment.ModifyEmploymentCommand;
@@ -31,7 +30,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class ModifyBuildCaseService implements ModifyBuildCaseUseCase {
+class ModifyBuildCaseService implements ModifyBuildCaseUseCase {
 
     @Value("${file.uploadDir}")
     private String filePath;
@@ -52,7 +51,8 @@ public class ModifyBuildCaseService implements ModifyBuildCaseUseCase {
         modifyBuildCasePort.modifyBuildCase(buildCaseId, buildCase);
     }
 
-    public List<BuildCaseTable> dtoToBuildCaseTables(List<BuildCaseTableDto> tableDtos) {
+    // 의존성 구조 수정 필요
+    public List<BuildCaseTable> dtoToBuildCaseTables(List<BuildCaseTable> tableDtos) {
         if (ObjectUtils.isEmpty(tableDtos)) return null;
         return tableDtos.stream()
                 .map(table -> BuildCaseTable.withoutId(table.getTitle(), table.getContent())).toList();

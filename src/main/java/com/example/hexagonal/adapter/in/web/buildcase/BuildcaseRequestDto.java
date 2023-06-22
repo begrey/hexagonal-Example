@@ -9,7 +9,7 @@ import java.util.List;
 
 
 @Schema(description = "구축 사례 요청 객체")
-public class BuildcaseRequestDto {
+class BuildcaseRequestDto {
 
     @Getter
     public static class Post {

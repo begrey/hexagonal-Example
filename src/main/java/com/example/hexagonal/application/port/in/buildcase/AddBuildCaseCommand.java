@@ -1,6 +1,5 @@
 package com.example.hexagonal.application.port.in.buildcase;
 
-import com.example.hexagonal.adapter.in.web.buildcase.BuildCaseTableDto;
 import com.example.hexagonal.application.port.in.employment.AddEmploymentCommand;
 import com.example.hexagonal.domain.buildcase.BuildCaseFile;
 import com.example.hexagonal.domain.buildcase.BuildCaseTable;
@@ -28,7 +27,7 @@ public class AddBuildCaseCommand {
 
     private final List<MultipartFile> buildCaseFile;
 
-    private final List<BuildCaseTableDto> buildCaseTable;
+    private final List<BuildCaseTable> buildCaseTable;
 
     private final Long category;
 
@@ -36,7 +35,7 @@ public class AddBuildCaseCommand {
                                              DisplayType isVisible,
                                              MultipartFile thumbnail,
                                              List<MultipartFile> buildCaseFile,
-                                             List<BuildCaseTableDto> buildCaseTable,
+                                             List<BuildCaseTable> buildCaseTable,
                                              Long category) {
         return new AddBuildCaseCommand(buildCaseName, isVisible, thumbnail, buildCaseFile, buildCaseTable, category);
     }

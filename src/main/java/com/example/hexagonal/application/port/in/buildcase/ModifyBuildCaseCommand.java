@@ -1,6 +1,6 @@
 package com.example.hexagonal.application.port.in.buildcase;
 
-import com.example.hexagonal.adapter.in.web.buildcase.BuildCaseTableDto;
+import com.example.hexagonal.domain.buildcase.BuildCaseTable;
 import com.example.hexagonal.global.enums.DisplayType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,7 +22,7 @@ public class ModifyBuildCaseCommand {
 
     private final List<MultipartFile> buildCaseFile;
 
-    private final List<BuildCaseTableDto> buildCaseTable;
+    private final List<BuildCaseTable> buildCaseTable;
 
     private final Long category;
 
@@ -30,8 +30,8 @@ public class ModifyBuildCaseCommand {
                                              DisplayType isVisible,
                                                 MultipartFile thumbnailSrc,
                                              List<MultipartFile> buildCaseFile,
-                                             List<BuildCaseTableDto> buildCaseTable,
+                                             List<BuildCaseTable> buildCaseTables,
                                              Long category) {
-        return new ModifyBuildCaseCommand(buildCaseName, isVisible, thumbnailSrc, buildCaseFile, buildCaseTable, category);
+        return new ModifyBuildCaseCommand(buildCaseName, isVisible, thumbnailSrc, buildCaseFile, buildCaseTables, category);
     }
 }

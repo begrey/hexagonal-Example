@@ -1,7 +1,6 @@
 package com.example.hexagonal.adapter.in.web.buildcase;
 
 
-import com.example.hexagonal.adapter.in.web.employment.EmploymentResponseDto;
 import com.example.hexagonal.domain.buildcase.BuildCase;
 import com.example.hexagonal.domain.employment.Employment;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -18,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Schema(description = "구축 사례 응답 객체")
-public class BuildcaseResponseDto {
+class BuildcaseResponseDto {
     private String buildCaseName;
     private String isVisible;
     private Long categoryId;

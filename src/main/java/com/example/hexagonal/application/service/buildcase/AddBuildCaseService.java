@@ -1,6 +1,5 @@
 package com.example.hexagonal.application.service.buildcase;
 
-import com.example.hexagonal.adapter.in.web.buildcase.BuildCaseTableDto;
 import com.example.hexagonal.application.port.in.buildcase.AddBuildCaseCommand;
 import com.example.hexagonal.application.port.in.buildcase.AddBuildCaseUseCase;
 import com.example.hexagonal.application.port.out.buildCase.AddBuildCasePort;
@@ -30,7 +29,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 @Service
 @Transactional
-public class AddBuildCaseService implements AddBuildCaseUseCase {
+class AddBuildCaseService implements AddBuildCaseUseCase {
 
     private final AddBuildCasePort addBuildCasePort;
     @Value("${file.uploadDir}")
@@ -60,7 +59,7 @@ public class AddBuildCaseService implements AddBuildCaseUseCase {
                 file.getSize());
         return buildCaseFile;
     }
-    public List<BuildCaseTable> toBuildCaseTable(List<BuildCaseTableDto> buildCaseTableDtos) {
+    public List<BuildCaseTable> toBuildCaseTable(List<BuildCaseTable> buildCaseTableDtos) {
         if (ObjectUtils.isEmpty(buildCaseTableDtos)) return null;
         return buildCaseTableDtos.stream()
                 .map(table -> BuildCaseTable.withoutId(table.getTitle(), table.getContent())).toList();
